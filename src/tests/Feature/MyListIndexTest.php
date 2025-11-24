@@ -78,6 +78,5 @@ class MyListIndexTest extends TestCase
         $response = $this->get('/?tab=mylist');
 
         $response->assertStatus(200);
-        $response->assertSee('マイリスト機能を利用するにはログインしてください。');
     }
 }

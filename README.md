@@ -48,7 +48,7 @@ php artisan cache:clear
 全テスト：php artisan test tests/Feature
 ID1「会員登録機能」：php artisan test tests/Feature/RegisterTest.php
 ID2「ログイン機能」：php artisan test tests/Feature/LoginTest.php
-ID3「ログアウト機能」: php artisan test tests/Feature/LoginTest.php
+ID3「ログアウト機能」: php artisan test tests/Feature/LogoutTest.php
 ID4「商品一覧取得」：php artisan test tests/Feature/ProductIndexTest.php
 ID5「マイリスト一覧取得」：php artisan test tests/Feature/MyListIndexTest.php
 ID6「商品検索機能」: php artisan test tests/Feature/ProductSearchTest.php
@@ -56,10 +56,10 @@ ID7「商品詳細情報取得」: php artisan test tests/Feature/ProductShowTes
 ID8「いいね機能」：php artisan test tests/Feature/ProductFavoriteTest.php
 ID9「コメント送信機能」： php artisan test tests/Feature/ProductCommentTest.php
 ID10「商品購入機能」： php artisan test tests/Feature/PurchaseTest.php
-ID11「支払い方法選択機能」：php artisan test tests/Feature/PurchaseTest.php
-ID12「配送先変更機能」： php artisan test tests/Feature/PurchaseTest.php
+ID11「支払い方法選択機能」：php artisan test tests/Feature/PaymentMethodSelectionTest.php
+ID12「配送先変更機能」： php artisan test tests/Feature/DeliveryAddressUpdateTest.php
 ID13「ユーザー情報取得」： php artisan test tests/Feature/ProfileTest.php
-ID14「ユーザー情報変更」： php artisan test tests/Feature/PurchaseTest.php
+ID14「ユーザー情報変更」： php artisan test tests/Feature/UserInformationUpdateTest.php
 ID15「出品商品情報登録」： php artisan test tests/Feature/ExhibitionTest.php
 ID16「メール認証機能」： php artisan test tests/Feature/EmailVerificationTest.php
 
@@ -127,8 +127,12 @@ MySQL画面：http://localhost:8080
 mailhog認証画面：http://localhost:8025/
 
 ### 画面仕様補足
-仕様書にはありませんが、ヘッダー部分のCOACHTECHのロゴをクリックすると商品一覧画面へ遷移します(運営に確認、了承済です)
-
+運営には確認、了承済みの仕様となっています
+## 1ヘッダー部分のCOACHTECHのロゴをクリックすると商品一覧画面へ遷移します
+## 2商品出品処理が完了、マイページ画面に遷移します
+## 3マイページ内において商品画像をクリックしたときの挙動
+商品詳細画面に遷移しますが各機能(購入ボタン非表示・いいね、コメント機能が使用不可)
+ 
 ### MailHogのメール認証手順
 1. 新規ユーザー登録を行う
 2. メール認証誘導画面に遷移、「認証はこちらから」のボタンをクリック
