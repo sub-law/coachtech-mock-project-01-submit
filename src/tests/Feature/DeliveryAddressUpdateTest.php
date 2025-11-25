@@ -28,9 +28,9 @@ class DeliveryAddressUpdateTest extends TestCase
         $response->assertStatus(200);
 
         $newAddress = [
-            'postal_code' => '123-4567',
-            'address' => '東京',
-            'building_name' => 'きのこビル501',
+            'postal_code' => '100-0005',
+            'address' => '東京都千代田区丸の内3-1-1',
+            'building_name' => '丸の内国際ビルディング101',
         ];
 
         $this->put("/purchase/address/{$buyer->id}", $newAddress)
@@ -61,14 +61,14 @@ class DeliveryAddressUpdateTest extends TestCase
         $response->assertStatus(200);
 
         $newAddress = [
-            'postal_code' => '123-4567',
-            'address' => '東京',
-            'building_name' => 'きのこビル501',
+            'postal_code' => '100-0005',
+            'address' => '東京都千代田区丸の内3-1-1',
+            'building_name' => '丸の内国際ビルディング201',
         ];
 
         $this->put("/purchase/address/{$buyer->id}", $newAddress)
             ->assertStatus(302);
-        $this->assertEquals('東京', $buyer->fresh()->address);
+        $this->assertEquals('東京都千代田区丸の内3-1-1', $buyer->fresh()->address);
 
         $response = $this->get("/purchase/{$product->id}");
         $response->assertStatus(200);

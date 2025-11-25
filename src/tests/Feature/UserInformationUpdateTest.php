@@ -17,7 +17,8 @@ class UserInformationUpdateTest extends TestCase
             'profile_image' => 'profile.png',
             'name' => 'テストユーザー',
             'postal_code' => '123-4567',
-            'address' => '東京都',
+            'address' => '東京都千代田区大手町1-1-1',
+            'building_name'  => '大手町ビルディング',           
         ]);
 
         /** @var \App\Models\User $user */
@@ -30,5 +31,6 @@ class UserInformationUpdateTest extends TestCase
         $response->assertSee($user->name);
         $response->assertSee($user->postal_code);
         $response->assertSee($user->address);
+        $response->assertSee($user->building_name);
     }
 }
