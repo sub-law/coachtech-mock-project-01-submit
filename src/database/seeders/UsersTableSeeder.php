@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'kiwi',
+            'name' => 'テスト太郎',
             'email' => 'kiwi@example.com',
             'password' => Hash::make('password'),
             'profile_image' => 'kiwi.png',
@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'orange',
+            'name' => 'テスト次郎',
             'email' => 'orange@example.com',
             'password' => Hash::make('password'),
             'profile_image' => 'orange.png',
@@ -34,7 +34,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'watermelon',
+            'name' => 'テスト花子',
             'email' => 'watermelon@example.com',
             'password' => Hash::make('password'),
             'email_verified_at' => Carbon::now(),

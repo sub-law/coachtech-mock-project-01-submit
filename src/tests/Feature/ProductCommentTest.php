@@ -39,6 +39,7 @@ class ProductCommentTest extends TestCase
             'content' => 'テストコメント',
         ]);
 
+        $this->assertEquals(1, $product->comments()->count());
         $response = $this->get("/item/{$product->id}");
         $response->assertSee('<span class="action-count">1</span>', false);
     }

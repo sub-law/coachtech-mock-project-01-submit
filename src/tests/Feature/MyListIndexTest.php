@@ -44,8 +44,8 @@ class MyListIndexTest extends TestCase
         $response = $this->get('/?tab=mylist');
 
         $response->assertStatus(200);
-        $response->assertSee('いいね商品');
-        $response->assertDontSee('非いいね商品');
+        $response->assertSee($favoriteProduct->name);
+        $response->assertDontSee($unlikedProduct->name);
     }
 
     public function test_購入済み商品には_Sold_ラベルが表示される()
