@@ -2,6 +2,9 @@
 Laravelによる商品出品・購入・コメント・お気に入り・メール認証機能を備えた模擬ECアプリケーションです。
 
 ## 環境構築手順
+クローンの作成
+git clone <リンク名>
+
 プロジェクト直下に.envを作成
 touch .env
 
@@ -48,7 +51,7 @@ php artisan cache:clear
 全テスト：php artisan test tests/Feature
 ID1「会員登録機能」：php artisan test tests/Feature/RegisterTest.php
 ID2「ログイン機能」：php artisan test tests/Feature/LoginTest.php
-ID3「ログアウト機能」: php artisan test tests/Feature/LoginTest.php
+ID3「ログアウト機能」: php artisan test tests/Feature/LogoutTest.php
 ID4「商品一覧取得」：php artisan test tests/Feature/ProductIndexTest.php
 ID5「マイリスト一覧取得」：php artisan test tests/Feature/MyListIndexTest.php
 ID6「商品検索機能」: php artisan test tests/Feature/ProductSearchTest.php
@@ -56,10 +59,10 @@ ID7「商品詳細情報取得」: php artisan test tests/Feature/ProductShowTes
 ID8「いいね機能」：php artisan test tests/Feature/ProductFavoriteTest.php
 ID9「コメント送信機能」： php artisan test tests/Feature/ProductCommentTest.php
 ID10「商品購入機能」： php artisan test tests/Feature/PurchaseTest.php
-ID11「支払い方法選択機能」：php artisan test tests/Feature/PurchaseTest.php
-ID12「配送先変更機能」： php artisan test tests/Feature/PurchaseTest.php
+ID11「支払い方法選択機能」：php artisan test tests/Feature/PaymentMethodSelectionTest.php
+ID12「配送先変更機能」： php artisan test tests/Feature/DeliveryAddressUpdateTest.php
 ID13「ユーザー情報取得」： php artisan test tests/Feature/ProfileTest.php
-ID14「ユーザー情報変更」： php artisan test tests/Feature/PurchaseTest.php
+ID14「ユーザー情報変更」： php artisan test tests/Feature/UserInformationUpdateTest.php
 ID15「出品商品情報登録」： php artisan test tests/Feature/ExhibitionTest.php
 ID16「メール認証機能」： php artisan test tests/Feature/EmailVerificationTest.php
 
@@ -68,35 +71,35 @@ PHPコンテナから出る　Ctrl+D
 ### ダミーデータユーザー情報（3名）
 
 ## 1
-name  kiwi
+name  テスト太郎
 email  kiwi@example.com
 password  password
 メール認証済み
 profile_image  kiwi.png
-postal_code  123-4567
-address  東京都足立区
-building_name  きのこビル101
+postal_code  100-0005
+address  東京都千代田区丸の内3-1-1
+building_name  丸の内国際ビルディング101
 出品数:5 ('腕時計','HDD','玉ねぎ3束','革靴','ノートPC',)
 購入数:0
 お気に入り:全商品(自身が出品した商品含む)
 コメント:1('マイク',)
 
 ## 2
-name  orange
+name  テスト次郎
 email  orange@example.com
 password  password
 メール認証済み
 profile_image  orange.png
-postal_code  123-4567
-address  東京都足立区
-building_name  きのこビル201
+postal_code  100-0005
+address  東京都千代田区丸の内3-1-1
+building_name  丸の内国際ビルディング201
 出品数:5 ('マイク','ショルダーバッグ','タンブラー','コーヒーミル','メイクセット',)
 購入数:1('腕時計',)
 お気に入り:5(自身が出品した商品を除く全て)
 コメント:1('ノートPC',)
 
 ## 3
-name  watermelon
+name  テスト花子
 email  watermelon@example.com
 password password
 メール認証済み
@@ -110,11 +113,11 @@ password password
 ## 補足（ユーザー仕様関連）
 新規登録ユーザーは、自身が出品した商品に対して「お気に入り」「コメント」機能を利用できません。
 
-##  ユーザー「kiwi」のお気に入りデータに関して
+##  ユーザー「テスト太郎」のお気に入りデータに関して
 テストケース
   - ID4商品一覧取得：自分が出品した商品は一覧に表示されないことを確認
   - ID5マイリスト一覧取得：いいねした商品だけが一覧に表示されることを確認
-上記のテストケース両方を満たす条件を検証するため、ユーザー「kiwi」には例外的に自身が出品した商品にお気に入りステータスを付与し、マイリストタブには自身が出品した商品は表示されないことを確認しています
+上記のテストケース両方を満たす条件を検証するため、ユーザー「テスト太郎」には例外的に自身が出品した商品にお気に入りステータスを付与し、マイリストタブには自身が出品した商品は表示されないことを目的とし、確認しています
 
 ## 主なルート一覧
 本プロジェクトのルート構成（URL・メソッド・ミドルウェア）は、別途提出するスプレッドシートに記載しています。  
@@ -127,8 +130,11 @@ MySQL画面：http://localhost:8080
 mailhog認証画面：http://localhost:8025/
 
 ### 画面仕様補足
-仕様書にはありませんが、ヘッダー部分のCOACHTECHのロゴをクリックすると商品一覧画面へ遷移します(運営に確認、了承済です)
-
+以下の仕様は運営には確認、了承済みの上での実装となっています
+1：ヘッダー部分のCOACHTECHのロゴをクリックすると商品一覧画面へ遷移します
+2：商品出品処理が完了後は商品一覧画面に遷移します
+3：マイページ内において商品画像をクリックしたときには商品詳細画面に遷移しますが、各機能(購入ボタン非表示・いいね非表示、コメント機能の使用不可)商品詳細の確認のみが出来る仕様となっています
+ 
 ### MailHogのメール認証手順
 1. 新規ユーザー登録を行う
 2. メール認証誘導画面に遷移、「認証はこちらから」のボタンをクリック

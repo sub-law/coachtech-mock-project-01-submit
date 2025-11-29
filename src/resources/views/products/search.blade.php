@@ -8,16 +8,6 @@
 
 @section('content')
 
-<div class="search-header">
-    <h2>「{{ $query }}」の検索結果</h2>
-
-    @if ($products->isEmpty())
-    <p class="empty-message">該当する商品は見つかりませんでした。</p>
-    @else
-    <p class="result-count">{{ $products->count() }}件見つかりました。</p>
-    @endif
-</div>
-
 <div class="tab-wrapper">
     <div class="tab-menu">
         <a href="{{ route('search', ['query' => $query]) }}" class="{{ request('tab') !== 'mylist' ? 'tab-active' : 'tab' }}">おすすめ</a>
@@ -27,7 +17,6 @@
     <div class="product-row">
         @if (request('tab') === 'mylist')
         @guest
-        <p class="empty-message">マイリスト機能を利用するにはログインしてください。</p>
         @else
         @if ($products->isEmpty())
         {{-- 何も表示しない（仕様通り） --}}

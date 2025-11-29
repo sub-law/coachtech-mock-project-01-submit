@@ -86,18 +86,6 @@
     pointer-events: none;
 }
 
-.empty-message {
-    text-align: center;
-    margin: 40px 0;
-    padding: 20px;
-    background-color: #f9f9f9;
-    color: #555;
-    font-size: 18px;
-    border: 1px dashed #ccc;
-    border-radius: 8px;
-    font-style: italic;
-}
-
 @media screen and (max-width: 768px) {
     .tab-wrapper {
         padding: 20px 0;

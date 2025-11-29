@@ -16,7 +16,6 @@
     <div class="product-row">
         @if (request('tab') === 'mylist')
         @guest
-        <p class="empty-message">マイリスト機能を利用するにはログインしてください。</p>
         @else
         @if ($products->isEmpty())
         {{-- 何も表示しない（仕様通り） --}}

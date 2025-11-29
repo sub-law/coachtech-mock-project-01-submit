@@ -36,19 +36,19 @@
         @enderror
 
         <label for="postal_code" class="form-label">郵便番号</label>
-        <input type="text" id="postal_code" name="postal_code" class="form-input">
+        <input type="text" id="postal_code" name="postal_code" class="form-input" value="{{ old('postal_code', Auth::user()->postal_code) }}">
         @error('postal_code')
         <div class="form-error">{{ $message }}</div>
         @enderror
 
         <label for="address" class="form-label">住所</label>
-        <input type="text" id="address" name="address" class="form-input">
+        <input type="text" id="address" name="address" class="form-input" value="{{ old('address', Auth::user()->address) }}">
         @error('address')
         <div class="form-error">{{ $message }}</div>
         @enderror
 
         <label for="building" class="form-label">建物名</label>
-        <input type="text" id="building_name" name="building_name" class="form-input">
+        <input type="text" id="building_name" name="building_name" class="form-input" value="{{ old('building_name', Auth::user()->building_name) }}">
 
         <button type="submit" class="form-button">更新する</button>
     </form>

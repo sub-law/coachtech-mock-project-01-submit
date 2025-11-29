@@ -20,7 +20,10 @@
             </div>
 
             <form action="{{ route('search') }}" method="GET" class="search-form">
-                <input type="text" name="query" placeholder="何をお探しですか？" class="search-input">
+                <input type="text" name="query"
+                    placeholder="何をお探しですか？"
+                    class="search-input"
+                    value="{{ request('query') }}">
             </form>
 
             <div class="header-right">

@@ -70,6 +70,10 @@
     position: relative;
 }
 
+.section-title.active {
+    color: #ff5555;
+}
+
 .section-title.active::after {
     content: '';
     position: absolute;

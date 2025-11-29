@@ -141,7 +141,7 @@
 
                         @guest
                         <button type="button" class="comment-submit-button disabled" disabled>
-                            ログインしてコメントする
+                            コメントを送信する
                         </button>
                         @endguest
                     </form>

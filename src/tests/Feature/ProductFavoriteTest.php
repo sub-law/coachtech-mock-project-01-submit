@@ -35,6 +35,7 @@ class ProductFavoriteTest extends TestCase
             'product_id' => $product->id,
         ]);
 
+        $this->assertEquals(1, $product->favorites()->count());
         $response = $this->get("/item/{$product->id}");
         $response->assertSee('<span class="action-count">1</span>', false);
     }
@@ -92,6 +93,7 @@ class ProductFavoriteTest extends TestCase
             'product_id' => $product->id,
         ]);
 
+        $this->assertEquals(0, $product->favorites()->count());
         $response = $this->get("/item/{$product->id}");
         $response->assertSee('<span class="action-count">0</span>', false);
     }

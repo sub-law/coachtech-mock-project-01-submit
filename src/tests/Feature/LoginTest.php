@@ -65,19 +65,5 @@ class LoginTest extends TestCase
         $this->assertAuthenticatedAs($user);
     }
 
-    public function test_ログアウト処理が実行される()
-    {
-        /** @var \App\Models\User $user */
-
-        $user = User::factory()->create([
-            'email' => 'usera@example.com',
-            'password' => bcrypt('password123'),
-        ]);
-
-        $this->actingAs($user)
-            ->post('/logout')
-            ->assertRedirect('/'); 
-
-        $this->assertGuest();
-    }
+    
 }

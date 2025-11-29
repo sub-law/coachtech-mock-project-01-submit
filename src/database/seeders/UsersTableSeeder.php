@@ -12,29 +12,29 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'kiwi',
+            'name' => 'テスト太郎',
             'email' => 'kiwi@example.com',
             'password' => Hash::make('password'),
             'profile_image' => 'kiwi.png',
-            'postal_code' => '123-4567',
-            'address' => '東京都足立区',
-            'building_name' => 'きのこビル101',
+            'postal_code' => '100-0005',
+            'address' => '東京都千代田区丸の内3-1-1',
+            'building_name' => '丸の内国際ビルディング101',
             'email_verified_at' => Carbon::now(),
         ]);
 
         User::create([
-            'name' => 'orange',
+            'name' => 'テスト次郎',
             'email' => 'orange@example.com',
             'password' => Hash::make('password'),
             'profile_image' => 'orange.png',
-            'postal_code' => '123-4567',
-            'address' => '東京都足立区',
-            'building_name' => 'きのこビル201',
+            'postal_code' => '100-0005',
+            'address' => '東京都千代田区丸の内3-1-1',
+            'building_name' => '丸の内国際ビルディング201',
             'email_verified_at' => Carbon::now(),
         ]);
 
         User::create([
-            'name' => 'watermelon',
+            'name' => 'テスト花子',
             'email' => 'watermelon@example.com',
             'password' => Hash::make('password'),
             'email_verified_at' => Carbon::now(),

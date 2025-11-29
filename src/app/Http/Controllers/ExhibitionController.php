@@ -39,6 +39,6 @@ class ExhibitionController extends Controller
         $categoryIds = $request->input('category_ids', []);
         $product->categories()->sync($categoryIds);
 
-        return redirect()->route('mypage')->with('status', '商品を出品しました！');
+        return redirect()->route('index')->with('status', '商品を出品しました！');
     }
 }
