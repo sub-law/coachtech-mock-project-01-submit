@@ -28,9 +28,14 @@ class UserInformationUpdateTest extends TestCase
         $response = $this->get("/mypage/profile");
         $response->assertStatus(200);
         $response->assertSee($user->profile_image);
+        $response->assertSee('profile.png');
         $response->assertSee($user->name);
+        $response->assertSee('テストユーザー');
         $response->assertSee($user->postal_code);
+        $response->assertSee('123-4567');
         $response->assertSee($user->address);
+        $response->assertSee('東京都千代田区大手町1-1-1');
         $response->assertSee($user->building_name);
+        $response->assertSee('大手町ビルディング');
     }
 }

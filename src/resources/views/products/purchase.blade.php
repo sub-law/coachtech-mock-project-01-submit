@@ -53,7 +53,9 @@
                 <p class="delivery-address">
                     〒{{ $user->postal_code ?? '未登録' }}<br>
                     {{ $user->address ?? '住所未登録' }}<br>
-                    {{ $user->building_name ?? '建物名未登録' }}
+                    @if(!empty($user->building_name))
+                    {{ $user->building_name }}
+                    @endif
                 </p>
 
                 @error('address')

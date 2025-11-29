@@ -49,7 +49,7 @@ class ProductShowTest extends TestCase
             'product_id' => $showProduct->id,
         ]);
 
-        Comment::factory()->create([
+        $comment = Comment::factory()->create([
             'user_id' => $commentUser->id,
             'product_id' => $showProduct->id,
             'content' => '古着',
@@ -62,16 +62,28 @@ class ProductShowTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('商品');
+        $response->assertSee($showProduct->name);
         $response->assertSee('ノーブランド');
+        $response->assertSee($showProduct->brand);
         $response->assertSee('それなりの品物');
+        $response->assertSee($showProduct->description);
         $response->assertSee('aaa.jpg');
+        $response->assertSee($showProduct->image_path);
         $response->assertSee('ファッション');
+        foreach ($showProduct->categories as $category) {
+            $response->assertSee($category->name);
+        }
         $response->assertSee('良好');
+        $response->assertSee($showProduct->condition);
         $response->assertSee('¥15,000');
+        $response->assertSee('¥' . number_format($showProduct->price));
         $response->assertSee('<span class="action-count">1</span>', false);
         $response->assertSee('コメント（1）');
+        $response->assertSee('コメント（' . $showProduct->comments()->count() . '）');
         $response->assertSee('コメント者');
+        $response->assertSee($commentUser->name);
         $response->assertSee('古着');
+        $response->assertSee($comment->content);
         $this->assertStringContainsString('<img', $response->getContent());
     }
 
@@ -95,5 +107,8 @@ class ProductShowTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('ファッション');
         $response->assertSee('アクセサリー');
+        foreach ($categories as $category) {
+            $response->assertSee($category->name);
+        }
     }
 }

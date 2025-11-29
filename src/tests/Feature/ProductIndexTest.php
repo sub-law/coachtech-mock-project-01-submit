@@ -22,23 +22,27 @@ class ProductIndexTest extends TestCase
         User::factory()->create([
         ]);
 
-        Product::factory()->create([
+        $productA = Product::factory()->create([
             'name' => '商品A',
             'image_path' => 'test1-image.jpg',
         ]);
-
-        Product::factory()->create([
+        $productB = Product::factory()->create([
             'name' => '商品B',
             'image_path' => 'test2-image.jpg',
         ]);
+
 
         $this->assertEquals(2, Product::count());
 
         $response = $this->get('/');
         $response->assertStatus(200);
+        $response->assertSeeText($productA->name);
         $response->assertSeeText('商品A');
+        $response->assertSee($productA->image_path);
         $response->assertSee('test1-image.jpg');
+        $response->assertSeeText($productB->name);
         $response->assertSeeText('商品B');
+        $response->assertSee($productB->image_path);
         $response->assertSee('test2-image.jpg');
 
         $this->assertStringContainsString('<img', $response->getContent());
@@ -49,9 +53,14 @@ class ProductIndexTest extends TestCase
         $seller = User::factory()->create(['name' => '出品者']);
         $buyer  = User::factory()->create(['name' => '購入者']);
 
-        Product::factory()->create([
+        $product = Product::factory()->create([
             'seller_id' => $seller->id,
             'buyer_id' => $buyer->id,
+            'status' => 'sold',
+        ]);
+
+        $this->assertDatabaseHas('products', [
+            'id' => $product->id,
             'status' => 'sold',
         ]);
 
@@ -65,12 +74,11 @@ class ProductIndexTest extends TestCase
         $user = User::factory()->create(['name' => '自分']);
         $otherUser = User::factory()->create(['name' => '他人']);
 
-        Product::factory()->create([
+        $myProduct = Product::factory()->create([
             'seller_id' => $user->id,
             'name' => '自分の商品',
         ]);
-
-        Product::factory()->create([
+        $otherProduct = Product::factory()->create([
             'seller_id' => $otherUser->id,
             'name' => '他人の商品',
         ]);
@@ -80,7 +88,9 @@ class ProductIndexTest extends TestCase
         $this->actingAs($user);
         $response = $this->get('/');
         $response->assertStatus(200);
+        $response->assertDontSee($myProduct->name);
         $response->assertDontSee('自分の商品');
+        $response->assertSee($otherProduct->name);
         $response->assertSee('他人の商品');
     }
 }

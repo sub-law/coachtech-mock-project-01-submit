@@ -38,10 +38,12 @@ class DeliveryAddressUpdateTest extends TestCase
 
         $response = $this->get("/purchase/{$product->id}");
         $response->assertStatus(200);
-
         $response->assertSeeText($newAddress['postal_code']);
+        $response->assertSee('100-0005');
         $response->assertSeeText($newAddress['address']);
+        $response->assertSee('東京都千代田区丸の内3-1-1');
         $response->assertSeeText($newAddress['building_name']);
+        $response->assertSee('丸の内国際ビルディング101');
     }
 
     public function test_購入した商品に送付先住所が紐づいて登録される()

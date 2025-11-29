@@ -27,8 +27,11 @@ class ProductSearchTest extends TestCase
         $response = $this->get('/search?query=Laravel');
         $response->assertStatus(200);
         $response->assertSee($matchProduct1->name);
+        $response->assertSee('Laravel本');
         $response->assertSee($matchProduct2->name);
+        $response->assertSee('Laravel入門');
         $response->assertDontSee($nonMatchProduct->name);
+        $response->assertDontSee('PHP入門');
     }
 
     public function test_検索状態がマイリストでも保持されている()
@@ -49,14 +52,20 @@ class ProductSearchTest extends TestCase
         $response = $this->get('/search?query=Laravel');
         $response->assertStatus(200);
         $response->assertSee($matchProduct1->name);
+        $response->assertSee('Laravel本');
         $response->assertSee($matchProduct2->name);
+        $response->assertSee('Laravel入門');
         $response->assertDontSee($nonMatchProduct->name);
+        $response->assertDontSee('PHP入門');
 
         $response = $this->get('/search?tab=mylist&query=Laravel');
         $response->assertStatus(200);
         $response->assertSee($matchProduct1->name);
+        $response->assertSee('Laravel本');
         $response->assertSee($matchProduct2->name);
+        $response->assertSee('Laravel入門');
         $response->assertDontSee($nonMatchProduct->name);
+        $response->assertDontSee('PHP入門');
         $response->assertSee('value="Laravel"', false);
     }
 }

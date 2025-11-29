@@ -45,7 +45,9 @@ class MyListIndexTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee($favoriteProduct->name);
+        $response->assertSee('いいね商品');
         $response->assertDontSee($unlikedProduct->name);
+        $response->assertDontSee('非いいね商品');
     }
 
     public function test_購入済み商品には_Sold_ラベルが表示される()
@@ -68,6 +70,11 @@ class MyListIndexTest extends TestCase
         /** @var \App\Models\User $viewer */
         $this->actingAs($viewer);
         $response = $this->get('/?tab=mylist');
+
+        $this->assertDatabaseHas('products', [
+            'id' => $product->id,
+            'status' => 'sold',
+        ]);
 
         $response->assertStatus(200);
         $response->assertSee('Sold');
